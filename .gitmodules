@@ -1,0 +1,6 @@
+[submodule "locky-proto"]
+	path = locky-proto
+	url = git@github.com:aklitzke/locky-proto.git
+[submodule "proto"]
+	path = proto
+	url = git@github.com:aklitzke/locky-proto.git
