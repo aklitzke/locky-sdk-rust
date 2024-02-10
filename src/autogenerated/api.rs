@@ -1,17 +1,5 @@
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct HelloRequest {
-    #[prost(string, tag = "1")]
-    pub name: ::prost::alloc::string::String,
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct HelloReply {
-    #[prost(string, tag = "1")]
-    pub message: ::prost::alloc::string::String,
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateAccountRequest {
     #[prost(string, tag = "1")]
     pub email: ::prost::alloc::string::String,
@@ -61,16 +49,29 @@ pub struct GetKeyResponse {
     #[prost(bytes = "vec", tag = "2")]
     pub encaps_ciphertext: ::prost::alloc::vec::Vec<u8>,
 }
+/// Just for testing
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Ping {
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Pong {
+    #[prost(string, tag = "1")]
+    pub message: ::prost::alloc::string::String,
+}
 /// Generated client implementations.
-pub mod ideal_fiesta_client {
+pub mod locky_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::http::Uri;
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
-    pub struct IdealFiestaClient<T> {
+    pub struct LockyClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl IdealFiestaClient<tonic::transport::Channel> {
+    impl LockyClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -81,7 +82,7 @@ pub mod ideal_fiesta_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> IdealFiestaClient<T>
+    impl<T> LockyClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -99,7 +100,7 @@ pub mod ideal_fiesta_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> IdealFiestaClient<InterceptedService<T, F>>
+        ) -> LockyClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -109,10 +110,11 @@ pub mod ideal_fiesta_client {
                     <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
                 >,
             >,
-            <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
-                Into<StdError> + Send + Sync,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+            >>::Error: Into<StdError> + Send + Sync,
         {
-            IdealFiestaClient::new(InterceptedService::new(inner, interceptor))
+            LockyClient::new(InterceptedService::new(inner, interceptor))
         }
         /// Compress requests with the given encoding.
         ///
@@ -145,73 +147,86 @@ pub mod ideal_fiesta_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        pub async fn say_hello(
-            &mut self,
-            request: impl tonic::IntoRequest<super::HelloRequest>,
-        ) -> std::result::Result<tonic::Response<super::HelloReply>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/api.IdealFiesta/SayHello");
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("api.IdealFiesta", "SayHello"));
-            self.inner.unary(req, path, codec).await
-        }
         pub async fn create_account(
             &mut self,
             request: impl tonic::IntoRequest<super::CreateAccountRequest>,
-        ) -> std::result::Result<tonic::Response<super::CreateAccountResponse>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+        ) -> std::result::Result<
+            tonic::Response<super::CreateAccountResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/api.IdealFiesta/CreateAccount");
+            let path = http::uri::PathAndQuery::from_static("/api.Locky/CreateAccount");
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("api.IdealFiesta", "CreateAccount"));
+            req.extensions_mut().insert(GrpcMethod::new("api.Locky", "CreateAccount"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn create_key(
             &mut self,
             request: impl tonic::IntoRequest<super::CreateKeyRequest>,
-        ) -> std::result::Result<tonic::Response<super::CreateKeyResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+        ) -> std::result::Result<
+            tonic::Response<super::CreateKeyResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/api.IdealFiesta/CreateKey");
+            let path = http::uri::PathAndQuery::from_static("/api.Locky/CreateKey");
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("api.IdealFiesta", "CreateKey"));
+            req.extensions_mut().insert(GrpcMethod::new("api.Locky", "CreateKey"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn get_key(
             &mut self,
             request: impl tonic::IntoRequest<super::GetKeyRequest>,
         ) -> std::result::Result<tonic::Response<super::GetKeyResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/api.IdealFiesta/GetKey");
+            let path = http::uri::PathAndQuery::from_static("/api.Locky/GetKey");
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("api.IdealFiesta", "GetKey"));
+            req.extensions_mut().insert(GrpcMethod::new("api.Locky", "GetKey"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn ping_pong(
+            &mut self,
+            request: impl tonic::IntoRequest<super::Ping>,
+        ) -> std::result::Result<tonic::Response<super::Pong>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static("/api.Locky/PingPong");
+            let mut req = request.into_request();
+            req.extensions_mut().insert(GrpcMethod::new("api.Locky", "PingPong"));
             self.inner.unary(req, path, codec).await
         }
     }
