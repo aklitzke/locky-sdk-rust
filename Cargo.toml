@@ -1,6 +1,8 @@
 [package]
 name = "locky"
 version = "0.0.1"
+authors = ["Andrew R. Klitzke <andrewknpe@gmail.com>"]
+license = "MIT"
 edition = "2021"
 description = "Key Management Service SDK. Locky stores and retrieves cryptographic secrets in the cloud"
 homepage = "https://getloc.ky"
