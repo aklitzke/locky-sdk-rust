@@ -1,4 +1,4 @@
-Locky is a cloud-based key-management system specifically focused on preventing
+🧩 Locky is a cloud-based key-management system specifically focused on preventing
 harvest-now decrypt-later quantum attacks.
 
 **Standardized**: Utilizes NIST-approved post-quantum cryptographic parameters and algorithms (FIPS-203)<br>
