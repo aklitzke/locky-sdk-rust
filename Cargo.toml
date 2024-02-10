@@ -2,9 +2,7 @@
 name = "locky"
 version = "0.0.1"
 edition = "2021"
-readme = "readme.md"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+readme = "README.md"
 
 [[bin]]
 name = "build_protos"
