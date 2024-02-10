@@ -136,7 +136,7 @@ impl LockyClient {
                         .key_ciphertext
                         .try_into()
                         .map_err(|_| "bad key_ciphertext")?,
-                );
+                )?;
                 Ok(key)
             }
         }
@@ -167,13 +167,18 @@ impl LockyClient {
     }
 }
 
-fn decrypt_key(dk: &DecapsKey, ct: &CipherText, mut to_dec: [u8; 40]) -> Zeroizing<[u8; 32]> {
+fn decrypt_key(
+    dk: &DecapsKey,
+    ct: &CipherText,
+    mut to_dec: [u8; 40],
+) -> Result<Zeroizing<[u8; 32]>, Box<dyn std::error::Error>> {
     let ssk = dk.decaps(&ct);
     let kek = KekAes256::from(ssk.to_bytes());
     let mut res = Zeroizing::new([0u8; 32]);
-    kek.unwrap(&to_dec, res.as_mut()).unwrap();
+    kek.unwrap(&to_dec, res.as_mut())
+        .map_err(|_| "failed to decrypt key from Locky")?;
     to_dec.zeroize();
-    res
+    Ok(res)
 }
 
 #[doc(hidden)]
