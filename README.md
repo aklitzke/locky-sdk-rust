@@ -1,11 +1,11 @@
 # 🧩 Locky Rust SDK
 
-[Locky](https://getloc.ky) is a cloud-based key-management system specifically focused on preventing
+[Locky](https://getloc.ky) is a cloud-based key-management system focused on preventing
 harvest-now decrypt-later quantum attacks.
 
 **Standardized**: Utilizes NIST-approved post-quantum cryptographic parameters and algorithms (FIPS-203)<br>
 **Fast**: Keys are retrieved in under 50ms<br>
-**Secure**: Root keys are 'split up' so that if an entire datacenter's data were compromised, no keys would be exposed<br>
+**Secure**: Root keys are 'split up'. If an entire datacenter's data were compromised, no keys would be exposed<br>
 **Reliable**: No downtime even facing a catastrophic datacenter loss<br>
 **Flexible**: Locky can be used to store keys for AES, ChaCha20, Ascon, and most other data encryption algorithms<br>
 
@@ -17,7 +17,7 @@ harvest-now decrypt-later quantum attacks.
 
 # Example
 Retrieving a key from Locky
-```
+```rust
 # use locky::{LockyClient, LockyEnv};
 # use aes_gcm::{
 #       aead::{Aead, AeadCore, KeyInit, OsRng},
@@ -46,7 +46,7 @@ drop(key);
 ```
 
 ## Creating an account
-```
+```rust
 # use locky::{LockyClient, LockyEnv};
 # tokio_test::block_on(async {
 let mut client = LockyClient::new(LockyEnv::Staging);
@@ -62,7 +62,7 @@ let access_token = client.get_access_token().unwrap();
 ```
 
 ## Creating a key
-```
+```rust
 # use locky::{LockyClient, LockyEnv};
 # tokio_test::block_on(async {
 # let (account_id, access_token) = locky::get_test_account().await;
