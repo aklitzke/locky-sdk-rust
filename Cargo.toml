@@ -1,6 +1,6 @@
 [package]
 name = "locky"
-version = "0.0.1"
+version = "0.0.2-alpha"
 authors = ["Andrew R. Klitzke <andrewknpe@gmail.com>"]
 license = "MIT"
 edition = "2021"
