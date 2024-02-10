@@ -1,6 +1,6 @@
-# Locky Rust SDK
+# 🧩 Locky Rust SDK
 
-🧩 [Locky](https://getloc.ky) is a cloud-based key-management system specifically focused on preventing
+[Locky](https://getloc.ky) is a cloud-based key-management system specifically focused on preventing
 harvest-now decrypt-later quantum attacks.
 
 **Standardized**: Utilizes NIST-approved post-quantum cryptographic parameters and algorithms (FIPS-203)<br>
