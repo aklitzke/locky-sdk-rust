@@ -2,6 +2,11 @@
 name = "locky"
 version = "0.0.1"
 edition = "2021"
+description = "Key Management Service SDK. Locky stores and retrieves cryptographic secrets in the cloud"
+homepage = "https://getloc.ky"
+repository = "https://github.com/aklitzke/locky-sdk-rust"
+categories = ["cryptography", "api-bindings"]
+keywords = ["quantum", "secrets", "encryption", "security", "api"]
 readme = "README.md"
 
 [[bin]]
